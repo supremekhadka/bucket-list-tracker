@@ -52,13 +52,6 @@
     transform: translateX(calc(37rem - 25px - 1.25rem));
 }
 
-.delete_icon:hover {
-    width: 37rem;
-    transform: translateX(0) !important;
-    transition: transform 200ms ease-in-out;
-
-}
-    
 .item:active {
     transform: translate(3px, 3px);
     box-shadow: 0px 0px white;

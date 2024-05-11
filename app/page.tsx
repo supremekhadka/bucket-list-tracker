@@ -3,14 +3,15 @@
 import React from "react";
 import AddButton from "./components/addButton";
 import Item from "./components/item"
-import Checkbox from "./components/checkbox";
 
 import { useState } from "react";
+import { log } from "console";
 
 export default function Home() {
 
   const [item, setItem] = useState<Array<string | null>>([]);
   const [inputValue, setInputValue] = useState('');
+  const [checkedItem, setCheckedItem] = useState<boolean[]>([]);
  
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -18,15 +19,31 @@ export default function Home() {
     const newItemInput = document.getElementById('newItem') as HTMLInputElement;
     const newItem = newItemInput.value;
 
-    if(newItem !== '')
+    if(newItem !== ''){
       setItem([...item, newItem]);
+      setCheckedItem([...checkedItem, false]);
+    }
 
     setInputValue('');
   }
 
   const handleDelete = (indexToDelete: number) => {
-    setItem(item.filter((_, index) => index !== indexToDelete));
-  }
+    const updatedItems = item.filter((_, index) => index !== indexToDelete);
+    const updatedCheckedItems = checkedItem.filter((_, index) => index !== indexToDelete);
+    
+    console.log('deleted');
+    
+
+    setItem(updatedItems);
+    setCheckedItem(updatedCheckedItems);
+  };
+  
+
+  const handleCheckboxChange = (index: number, isChecked: boolean) => {
+    const updatedCheckedItems = [...checkedItem];
+    updatedCheckedItems[index] = isChecked; 
+    setCheckedItem(updatedCheckedItems); 
+  };  
 
   return (
     <>
@@ -51,11 +68,10 @@ export default function Home() {
             <div className={`w-1/2 h-full absolute left-0 rounded-full bg-green-400`}></div>
           </div>
           
-          <ul className="w-[40rem] flex flex-col items-start gap-5 mt-16">
+          <ul className="w-[40rem] flex flex-col items-start gap-4 mt-16">
             {item.map((value, index) => (
-              <li key={index} className="w-full flex gap-5 items-center ">
-                    <Item value = {value} index = {index} handleDelete = {handleDelete}/>
-                    <Checkbox index = {index}/>
+              <li key={index} className="w-full flex flex-col ">
+                    <Item value={value} index={index} handleDelete={handleDelete} checked={checkedItem[index] || false} handleCheckboxChange={handleCheckboxChange} />
               </li>
             ))}
           </ul>
