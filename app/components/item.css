@@ -1,0 +1,65 @@
+.item {
+    position: relative;
+    padding: 1.5rem 0;
+    width: calc(100% - 25px - 1.25rem);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 2px solid #fff;
+    background-color: black;
+    box-shadow: 0px 0px white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.item, .delete_icon, .item_text {
+    transition: all 200ms;
+}
+
+.item .item_text {
+    position: absolute;
+    padding: 1rem;
+    width: 100%;
+    text-overflow: ellipsis;
+    color: white;
+    font-weight: 600;
+    text-wrap: wrap;
+}
+
+.item .delete_icon {
+    position: absolute;
+    transform: translateX(37rem);
+    height: 100%;
+    width: 39px;
+    background-color: rgb(215, 0, 21);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item .svg {
+    transform: translateX(-2px);
+    width: 20px;
+    stroke: white;
+}
+
+.item:hover {
+    background:black;
+    box-shadow: 4px 4px white;
+}
+
+.item:hover .delete_icon{
+    transform: translateX(calc(37rem - 25px - 1.25rem));
+}
+
+.delete_icon:hover {
+    width: 37rem;
+    transform: translateX(0) !important;
+    transition: transform 200ms ease-in-out;
+
+}
+    
+.item:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0px 0px white;
+}

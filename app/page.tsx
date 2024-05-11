@@ -2,6 +2,8 @@
 
 import React from "react";
 import AddButton from "./components/addButton";
+import Item from "./components/item"
+import Checkbox from "./components/checkbox";
 
 import { useState } from "react";
 
@@ -9,6 +11,7 @@ export default function Home() {
 
   const [item, setItem] = useState<Array<string | null>>([]);
   const [inputValue, setInputValue] = useState('');
+ 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -19,6 +22,10 @@ export default function Home() {
       setItem([...item, newItem]);
 
     setInputValue('');
+  }
+
+  const handleDelete = (indexToDelete: number) => {
+    setItem(item.filter((_, index) => index !== indexToDelete));
   }
 
   return (
@@ -35,13 +42,21 @@ export default function Home() {
               }} 
               id="newItem" 
               autoFocus 
-              className="w-[calc(100%-160px)] h-full border-2 rounded-md bg-black p-2 " 
+              className="w-[calc(100%-160px)] h-[45px] border-2 rounded-md bg-black p-2 " 
             />
             <AddButton label="Add Item" onClick={handleSubmit} /> 
           </form>
-          <ul className="w-full flex flex-col items-center mt-10">
+
+          <div className="w-[40rem] mt-10 relative bg-gray-700 h-2 rounded-full">
+            <div className={`w-1/2 h-full absolute left-0 rounded-full bg-green-400`}></div>
+          </div>
+          
+          <ul className="w-[40rem] flex flex-col items-start gap-5 mt-16">
             {item.map((value, index) => (
-              <li key={index}>{value}</li>
+              <li key={index} className="w-full flex gap-5 items-center ">
+                    <Item value = {value} index = {index} handleDelete = {handleDelete}/>
+                    <Checkbox index = {index}/>
+              </li>
             ))}
           </ul>
         </div>

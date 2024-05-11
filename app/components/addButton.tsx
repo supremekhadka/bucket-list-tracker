@@ -1,6 +1,6 @@
 import './addButton.css';
 
-export default function addButton(props: any) {
+export default function AddButton(props: any) {
   return (
     <button onClick={props.onClick} type="button" className="button">
         <span className="button__text">Add Item</span>
