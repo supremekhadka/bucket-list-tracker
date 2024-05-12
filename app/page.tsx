@@ -55,10 +55,6 @@ export default function Home() {
     });
   };
 
-  console.log("Items:", item);
-  console.log("Checked Items:", checkedItem);
-  console.log(progressWidth)
-
   return (
     <>
       <div className="w-full flex flex-col items-center">
@@ -73,7 +69,7 @@ export default function Home() {
               }} 
               id="newItem" 
               autoFocus 
-              className="sm:w-[calc(100%-160px)] w-full h-[45px] border-2 rounded-md bg-black p-2 " 
+              className="sm:w-[calc(100%-160px)] w-[calc(100%-45px-0.5rem)] h-[45px] border-2 rounded-md bg-black p-2 " 
             />
             <AddButton label="Add Item" onClick={handleSubmit} /> 
           </form>
