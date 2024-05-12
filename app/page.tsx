@@ -3,8 +3,9 @@
 import React from "react";
 import AddButton from "./components/addButton";
 import Item from "./components/item"
+import ProgressBar from "./components/progressBar";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { log } from "console";
 
 export default function Home() {
@@ -12,6 +13,16 @@ export default function Home() {
   const [item, setItem] = useState<Array<string | null>>([]);
   const [inputValue, setInputValue] = useState('');
   const [checkedItem, setCheckedItem] = useState<boolean[]>([]);
+  const [progressWidth, setProgressWidth] = useState(checkedItem.filter(Boolean).length / item.length * 100);
+
+  useEffect(() => {
+    if (item.length === 0) {
+      setProgressWidth(0);
+    } else {
+      const newProgressWidth = checkedItem.filter(Boolean).length / item.length * 100;
+      setProgressWidth(newProgressWidth);
+    }
+  }, [checkedItem, item]);
  
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -31,26 +42,29 @@ export default function Home() {
     const updatedItems = item.filter((_, index) => index !== indexToDelete);
     const updatedCheckedItems = checkedItem.filter((_, index) => index !== indexToDelete);
     
-    console.log('deleted');
-    
-
     setItem(updatedItems);
     setCheckedItem(updatedCheckedItems);
   };
   
 
   const handleCheckboxChange = (index: number, isChecked: boolean) => {
-    const updatedCheckedItems = [...checkedItem];
-    updatedCheckedItems[index] = isChecked; 
-    setCheckedItem(updatedCheckedItems); 
-  };  
+    setCheckedItem(prevCheckedItem => {
+      const updatedCheckedItems = [...prevCheckedItem];
+      updatedCheckedItems[index] = isChecked;
+      return updatedCheckedItems;
+    });
+  };
+
+  console.log("Items:", item);
+  console.log("Checked Items:", checkedItem);
+  console.log(progressWidth)
 
   return (
     <>
       <div className="w-full flex flex-col items-center">
-        <h1 className="text-3xl font-bold mt-16">Bucket List Tracker</h1>
-        <div className="mt-10 flex flex-col items-center">
-          <form onSubmit={handleSubmit} className="flex w-[40rem] h-max gap-5 justify-center items-center">
+        <h1 className="text-4xl font-bold mt-16">Bucket List Tracker</h1>
+        <div className="mt-10 flex flex-col items-center sm:w-[40rem] sm:px-0 w-screen px-8">
+          <form onSubmit={handleSubmit} className="flex h-max w-full gap-5 justify-center items-center">
             <input 
               type="text" 
               value={inputValue} 
@@ -64,11 +78,9 @@ export default function Home() {
             <AddButton label="Add Item" onClick={handleSubmit} /> 
           </form>
 
-          <div className="w-[40rem] mt-10 relative bg-gray-700 h-2 rounded-full">
-            <div className={`w-1/2 h-full absolute left-0 rounded-full bg-green-400`}></div>
-          </div>
+          <ProgressBar progressWidth = {progressWidth}/>
           
-          <ul className="w-[40rem] flex flex-col items-start gap-4 mt-16">
+          <ul className="w-full flex flex-col items-start gap-4 mt-16">
             {item.map((value, index) => (
               <li key={index} className="w-full flex flex-col ">
                     <Item value={value} index={index} handleDelete={handleDelete} checked={checkedItem[index] || false} handleCheckboxChange={handleCheckboxChange} />
