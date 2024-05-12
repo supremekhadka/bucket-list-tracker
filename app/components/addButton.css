@@ -58,7 +58,7 @@
     box-shadow: 0px 0px white;
 }
 
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 640px){
   .button {
     position: relative;
     width: 45px;
@@ -82,8 +82,7 @@
     position: absolute;
     transform: none;
     height: 100%;
-    width: 42px;
-    right: -2px;
+    width: 45px;
     background-color: #1b1b1b;
     display: flex;
     align-items: center;
@@ -92,7 +91,7 @@
   } 
 
   .button:hover .button__icon {
-    width: 39px;
+    width: 45px;
     transform: none;
   }
 
