@@ -64,7 +64,7 @@ export default function Home() {
       <div className="w-full flex flex-col items-center">
         <h1 className="text-4xl font-bold mt-16">Bucket List Tracker</h1>
         <div className="mt-10 flex flex-col items-center sm:w-[40rem] sm:px-0 w-screen px-8">
-          <form onSubmit={handleSubmit} className="flex h-max w-full gap-5 justify-center items-center">
+          <form onSubmit={handleSubmit} className="flex h-max w-full sm:gap-5 gap-2 justify-center items-center">
             <input 
               type="text" 
               value={inputValue} 
@@ -73,7 +73,7 @@ export default function Home() {
               }} 
               id="newItem" 
               autoFocus 
-              className="w-[calc(100%-160px)] h-[45px] border-2 rounded-md bg-black p-2 " 
+              className="sm:w-[calc(100%-160px)] w-full h-[45px] border-2 rounded-md bg-black p-2 " 
             />
             <AddButton label="Add Item" onClick={handleSubmit} /> 
           </form>

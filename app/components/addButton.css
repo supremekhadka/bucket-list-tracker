@@ -10,50 +10,90 @@
     background-color: black;
     border-radius: 10px;
     overflow: hidden;
-  }
-  
-  .button, .button__icon, .button__text {
-    transition: all 0.3s;
-  }
-  
-  .button .button__text {
+}
+
+.button, .button__icon, .button__text {
+    transition: all 0.2s;
+}
+
+.button .button__text {
     position: absolute;
     left: 25px;
     color: white;
     font-weight: 600;
-  }
-  
-  .button .button__icon {
+}
+
+.button .button__icon {
     position: absolute;
     transform: translateX(109px);
     height: 100%;
     width: 39px;
-    background-color: rgb(30, 30, 30);
+    background-color: #1b1b1b;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .button .svg {
+}
+
+.button .svg {
     transform: translateX(-2px);
     width: 20px;
     stroke: white;
-  }
-  
-  .button:hover {
+}
+
+.button:hover {
     background:black;
-  }
+}
   
-  .button:hover .button__text {
+.button:hover .button__text {
     color: transparent;
-  }
+}
   
-  .button:hover .button__icon {
+.button:hover .button__icon {
     width: 148px;
     transform: translateX(0);
-  }
+}
   
-  .button:active {
+.button:active {
     transform: translate(3px, 3px);
     box-shadow: 0px 0px white;
+}
+
+@media only screen and (max-width: 600px){
+  .button {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    box-shadow: 4px 4px white;
+    background-color: black;
+    border-radius: 10px;
+    overflow: hidden;
   }
+
+  .button .button__text {
+    display: none;
+  }
+
+  .button .button__icon {
+    position: absolute;
+    transform: none;
+    height: 100%;
+    width: 42px;
+    right: -2px;
+    background-color: #1b1b1b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  } 
+
+  .button:hover .button__icon {
+    width: 39px;
+    transform: none;
+  }
+
+}
