@@ -14,15 +14,17 @@ const Checkbox: React.FC<CheckboxProps> = (props) => {
   };
 
   return (
-    <div className="checkbox-wrapper-19">
-      <input
-        id={props.index.toString()}
-        type="checkbox"
-        checked={props.checked}
-        onChange={handleCheckboxChange}
-      />
-      <label className="check-box" htmlFor={props.index.toString()}></label>
-    </div>
+    <>
+      <div className="checkbox-wrapper-19">
+        <input
+          id={props.index.toString()}
+          type="checkbox"
+          checked={props.checked}
+          onChange={handleCheckboxChange}
+        />
+        <label className="check-box" htmlFor={props.index.toString()}></label>
+      </div>
+    </>
   );
 };
 
