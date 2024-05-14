@@ -1,12 +1,9 @@
 'use client'
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AddButton from "../components/addButton";
 import Item from "../components/item"
 import ProgressBar from "../components/progressBar";
-
-import { useState, useEffect } from "react";
-import { log } from "console";
 
 export default function Dashboard() {
 
@@ -78,7 +75,7 @@ export default function Dashboard() {
           
           <ul className="w-full flex flex-col items-start gap-4 mt-16">
             {item.map((value, index) => (
-              <li key={index} className="w-full flex flex-col ">
+              <li key={index} className={`w-full flex flex-col ${checkedItem[index] ? `order-first` : `order-none`}` }>
                     <Item value={value} index={index} handleDelete={handleDelete} checked={checkedItem[index] || false} handleCheckboxChange={handleCheckboxChange} />
               </li>
             ))}
