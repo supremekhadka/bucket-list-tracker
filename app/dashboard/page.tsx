@@ -4,9 +4,12 @@ import React, { useState, useEffect } from "react";
 import AddButton from "../components/addButton";
 import Item from "../components/item"
 import ProgressBar from "../components/progressBar";
+import { useAuth } from "@clerk/clerk-react";
+import { getList } from "@/utils/supabaseRequests";
 
 export default function Dashboard() {
-
+  const { userId, getToken } = useAuth();
+  const [loadingList, setLoadingList] = useState<boolean>(false);
   const [item, setItem] = useState<Array<string | null>>([]);
   const [inputValue, setInputValue] = useState('');
   const [checkedItem, setCheckedItem] = useState<boolean[]>([]);
